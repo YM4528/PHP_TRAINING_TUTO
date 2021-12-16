@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php
+<?php
     for ($row = 1; $row <= 11; $row++) {
         if ($row % 2 != 0) {
             for ($space = 10; $space >= $row; $space--) {

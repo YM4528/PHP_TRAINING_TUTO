@@ -5,27 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Tutorial01</title>
-
-    <style>
-        table {
-            width: 270px;
-            border: 2px solid #000;
-        }
-
-        #td1 {
-            height: 30px;
-            width: 30px;
-            background-color: #FFFFFF;
-        }
-
-        #td2 {
-            height: 30px;
-            width: 30px;
-            background-color: #000000;
-        }
-    </style>
-
 
 </head>
 
