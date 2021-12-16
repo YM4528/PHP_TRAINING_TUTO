@@ -9,29 +9,25 @@
 </head>
 
 <body>
-<?php
-    for ($row = 1; $row <= 11; $row++) {
-        if ($row % 2 != 0) {
-            for ($space = 10; $space >= $row; $space--) {
-                echo "&nbsp;&nbsp;";
-            }
-            for ($col = 1; $col <= $row; $col++) {
-                echo "* &ensp;";
-            }
-            echo "<br>";
-        }
+    <?php
+    echo "<pre>";
+    $n = 6;
+    for ($i = 1; $i < 6; $i++) {
+        for ($j = $i; $j < 6; $j++)
+            echo "&nbsp;&nbsp;";
+        for ($j = 2 * $i - 1; $j > 0; $j--)
+            echo ("&nbsp;*");
+        echo "<br>";
     }
-    for ($row = 1; $row <= 9; $row++) {
-        if ($row % 2 != 0) {
-            for ($space = 0; $space <= $row; $space++) {
-                echo "&nbsp;&nbsp;";
-            }
-            for ($col = 9; $col >= $row; $col--) {
-                echo "* &ensp;";
-            }
-            echo "<br>";
-        }
+
+    for ($i = 6; $i > 0; $i--) {
+        for ($j = $n - $i; $j > 0; $j--)
+            echo "&nbsp;&nbsp;";
+        for ($j = 2 * $i - 1; $j > 0; $j--)
+            echo ("&nbsp;*");
+        echo "<br>";
     }
+    echo "</pre>";
     ?>
 </body>
 
