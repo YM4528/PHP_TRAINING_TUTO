@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,14 +8,25 @@
   <title>Tutorial 4</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="card">
-    <h1>Login Form</h1>
-    <form action="home.php" method="post">
-      Name : <input type="text" name="name" id="name" required><br><br>
-      Password : <input type="password" name="password" id="password" required><br><br>
-      <input type="submit" value="Login">
-    </form>
-  </div>
+
+  <h1>Login Form</h1>
+
+  <form action="home.php" method="post">
+    Name : <input type="email" name="email" id="email" required><br><br>
+    Password : <input type="password" name="password" id="password" required><br><br>
+    <input type="submit" value="Login">
+  </form>
+  <br>
+
+  <?php
+  if (isset($_GET["fail"])) {
+    echo "<small style='color:red;'>*Invalid email or password!</small>";
+  }
+  ?>
+
+
 </body>
+
 </html>

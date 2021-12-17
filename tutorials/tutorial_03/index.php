@@ -9,19 +9,30 @@
 </head>
 
 <body>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-    Enter your DOB:
-    <br><br> 
-    <input type="date" name="dob" id="dob" required>
-    <input type="submit" value="Calculate age">
-  </form>
-  <br>
+
   <?php
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $dob = $_POST["dob"];
-    $today = date("Y-m-d");
-    $diff = date_diff(date_create($dob), date_create($today))->format('%y');
-    echo 'Your age is ' . $diff;
+  function getAge($dob)
+  {
+    $dob = new DateTime($dob);
+    $today = new Datetime(date('Y'));
+    if ($dob > $today) {
+      return 'You are not born yet';
+    }
+    $diff = $today->diff($dob);
+    return 'Your Current Age is : ' . $diff->y;
+  }
+  ?>
+
+  <form>
+    Enter your date of birth: <br><br>
+    <input type="date" name="dob" value="<?php echo (isset($_GET['dob'])) ? $_GET['dob'] : ''; ?>" required>
+    <input type="submit" value="Calculate Age">
+    <br><br>
+  </form>
+
+  <?php
+  if (isset($_GET['dob']) && $_GET['dob'] != '') {
+    echo getAge($_GET['dob']);
   }
   ?>
 </body>
