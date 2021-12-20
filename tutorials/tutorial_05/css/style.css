@@ -1,4 +1,4 @@
-/*table,
+table,
 table td {
   padding: 10px;
   border: 1px solid #000;
@@ -8,4 +8,4 @@ table td {
 table.excel tr:first-child {
   font-size: 20px;
   font-weight: 700;
-}*/
+}
