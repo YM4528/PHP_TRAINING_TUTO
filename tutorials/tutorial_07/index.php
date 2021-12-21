@@ -28,7 +28,7 @@
         <br>
         <?php
         if (isset($_GET["status"])) {
-            echo '<img src="image.png" />';
+            echo '<img src="image/qrcode.png" />';
         }
         ?>
     </div>

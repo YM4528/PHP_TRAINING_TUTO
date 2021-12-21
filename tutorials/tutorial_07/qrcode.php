@@ -10,7 +10,7 @@ $debugLog = ob_get_contents();
 ob_end_clean();
 
 //save img.png
-QRcode::png($codeText, "image.png", QR_ECLEVEL_H, 10);
+QRcode::png($codeText, "image/qrcode.png", QR_ECLEVEL_H, 10);
 header("location:index.php?status=1");
 
 ?>
