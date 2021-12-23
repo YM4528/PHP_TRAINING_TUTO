@@ -31,7 +31,7 @@ echo "<script>var data=" . json_encode($data) . ";</script>";
 
     <div id="con">
         <canvas id="myCanvas"></canvas>
-        <p>The bar chart shows age of students</p>
+        <p>This line chart shows age of students</p>
     </div>
 </body>
 
