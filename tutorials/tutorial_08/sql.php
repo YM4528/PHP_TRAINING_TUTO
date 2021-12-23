@@ -8,7 +8,7 @@ $conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  die("Connection failed: " . $conn->connect_error);
 }
 
 $sql = "CREATE DATABASE IF NOT EXISTS sampleDb;";
@@ -23,6 +23,6 @@ $sql = "CREATE TABLE IF NOT EXISTS students (
   age INT(5) NOT NULL,
   email VARCHAR(50),
   phone_number VARCHAR(15),
-  major VARCHAR(50)
+  major VARCHAR(5)
   );";
 $conn->query($sql);

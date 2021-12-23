@@ -12,7 +12,7 @@
 
 <body>
     <?php
-    require_once 'config.php';
+    require_once 'sql.php';
     $major_err = "";
     session_start();
     if (isset($_GET["id"])) {

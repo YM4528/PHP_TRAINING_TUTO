@@ -13,7 +13,7 @@
 
 <body>
     <?php
-    require_once 'config.php';
+    require_once 'sql.php';
     $major_err = "";
     $name = "";
     $age = null;
