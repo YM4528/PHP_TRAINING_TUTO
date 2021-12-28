@@ -18,11 +18,19 @@ require_once 'sql.php';
     <div class="container">
         <div class="header clearfix">
             <h1>Student List</h1>
-            <a href="add.php">Add New Student</a>
+            <a href="../tutorial_10/logout.php" class="logout">Logout</a>
+            <a class="btnaddstu" href="add.php">Add New Student</a>
+            <a class="btngraph" href="graph.php">Show Graph</a>
+            
         </div>
         <br>
         <br>
         <?php
+         session_start();
+         $status = $_SESSION['login_status'];
+         if (!$status) {
+           header('location:../tutorial_10/index.php');
+         }
         $sql = "select * from students;";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) :

@@ -14,6 +14,11 @@
 <body>
     <?php
     require_once 'sql.php';
+    session_start();
+    $status = $_SESSION['login_status'];
+    if (!$status) {
+        header('location:../tutorial_10/index.php');
+    }
     $major_err = "";
     session_start();
     if (isset($_GET["id"])) {
