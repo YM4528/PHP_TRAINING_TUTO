@@ -28,7 +28,7 @@
       $mail->IsSMTP(); // enable SMTP // telling the class to use SMTP
       $mail->SMTPAuth = true;  // authentication enabled
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-      //$mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
+      $mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for GMail
       $mail->SMTPAutoTLS = false;
       $mail->Host = 'smtp.gmail.com';
       $mail->Port = 587;
