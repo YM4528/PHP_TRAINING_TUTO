@@ -1,18 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
 use App\Task;
 use Illuminate\Http\Request;
+
+/**
+ * Display All Tasks
+ */
 
 Route::group(['middleware' => ['web']], function () {
     /**
@@ -24,33 +17,33 @@ Route::group(['middleware' => ['web']], function () {
         ]);
     });
 
-    /**
-     * Add New Task
-     */
-    Route::post('/task', function (Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-        ]);
+/**
+ * Add A New Task
+ */
+Route::post('/task', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:255',
+    ]);
 
-        if ($validator->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($validator);
-        }
+    if ($validator->fails()) {
+        return redirect('/')
+            ->withInput()
+            ->withErrors($validator);
+    }
 
-        $task = new Task;
-        $task->name = $request->name;
-        $task->save();
+    $task = new Task;
+    $task->name = $request->name;
+    $task->save();
 
-        return redirect('/');
-    });
+    return redirect('/');
+});
+/**
+ * Delete An Existing Task
+ */
+Route::delete('/task/{id}', function ($id) {
+    Task::findOrFail($id)->delete();
 
-    /**
-     * Delete Task
-     */
-    Route::delete('/task/{id}', function ($id) {
-        Task::findOrFail($id)->delete();
+    return redirect('/');
+});
 
-        return redirect('/');
-    });
 });
