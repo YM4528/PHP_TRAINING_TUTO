@@ -1,4 +1,5 @@
 <?php
+
 $password = "Apple4528@";
 session_start();
 if (isset($_SESSION["password"])) {
@@ -14,3 +15,5 @@ if ($email == $user_email && $password == $user_password) {
 } else {
   header('location:index.php?fail=1');
 }
+
+

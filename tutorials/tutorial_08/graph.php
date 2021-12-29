@@ -40,6 +40,8 @@ echo "<script>var data=" . json_encode($data) . ";</script>";
     <div id="con">
         <canvas id="myCanvas"></canvas>
         <p>This line chart shows age of students</p>
+        <br>
+        <a href="../tutorial_08/index.php" class="btn">Back</a>
     </div>
 </body>
 
