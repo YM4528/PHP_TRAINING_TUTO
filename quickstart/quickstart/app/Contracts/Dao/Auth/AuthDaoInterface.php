@@ -5,14 +5,22 @@ namespace App\Contracts\Dao\Auth;
 use Illuminate\Http\Request;
 
 /**
- * Interface of Data Access Object for Authentication
+ * Interface for Data Accessing Object of auth
  */
 interface AuthDaoInterface
 {
-  /**
-   * To Save User with values from request
-   * @param Request $request request including inputs
-   * @return Object created user object
-   */
-  public function saveUser(Request $request);
+    /**
+     * To login
+     * @param Request $request request with inputs
+     * @return Object  saved login
+     */
+    public function postAuth($request);
+
+
+    /**
+     * To register
+     * @param Request $request request with inputs
+     * @return Object saved register
+     */
+    public function registerAuth($request);
 }

@@ -3,35 +3,48 @@
 namespace App\Dao\Auth;
 
 use App\Contracts\Dao\Auth\AuthDaoInterface;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * Data Access Object for Authentication
+ * Interface for Data Accessing Object of task
  */
 class AuthDao implements AuthDaoInterface
 {
-  /**
-   * To Save User with values from request
-   * @param Request $request request including inputs
-   * @return Object created user object
-   */
-  public function saveUser(Request $request)
-  {
-    $user = new User();
-    $user->name = $request['name'];
-    $user->email = $request['email'];
-    $user->password = Hash::make($request['password']);
-    $user->profile = $request['profile'];
-    $user->type = $request['type'];
-    $user->phone = $request['phone'];
-    $user->dob = $request['dob'];
-    $user->address = $request['address'];
-    $user->created_user_id = Auth::user()->id ?? 1;
-    $user->updated_user_id = Auth::user()->id ?? 1;
-    $user->save();
-    return $user;
-  }
+    /**
+     * To login
+     * @param Request $request request with inputs
+     * @return Object saved login
+     */
+    public function postAuth($request)
+    {
+        return $request->only('email', 'password');
+    }
+
+    /**
+     * To register
+     * @param Request $request request with inputs
+     * @return Object  saved register
+     */
+    public function registerAuth($request)
+    {
+        $data = $request->all();
+        $check = $this->create($data);
+        return $check;
+    }
+
+    /**
+     * To create
+     * @param Request $request request with inputs
+     * @return Object create
+     */
+    public function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
+    }
 }
