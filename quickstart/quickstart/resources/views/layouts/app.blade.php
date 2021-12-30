@@ -38,6 +38,8 @@
         </a>
       </div>
 
+      <a class="nav-link navbar-brand" href="{{ route('logout') }}">Logout</a>
+
     </div>
   </nav>
 
