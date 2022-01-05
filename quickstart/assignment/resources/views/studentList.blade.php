@@ -12,9 +12,13 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-<div class="d-flex mb-3">
+<div class="d-flex mb-3 float-none justify-content-between">
   <a href="{{ route('addStudent.get') }}" class="btn btn-info"> <i class="fa fa-plus"></i> Add Student</a>
+  <a href="{{ route('student.export') }}" class="btn btn-success float-start .ms-1"><i class="fa fa-download"></i> Export</a>
+  <a href="{{ route('student.import.get') }}" class="btn btn-success float-end"><i class="fas fa-file-import"></i> Import</a>
+
 </div>
+
 <table class="table table-info table-hover">
   <thead>
     <tr>
@@ -66,8 +70,6 @@
       </td>
     </tr>
     @endif
-
-
   </tbody>
 </table>
 @endsection

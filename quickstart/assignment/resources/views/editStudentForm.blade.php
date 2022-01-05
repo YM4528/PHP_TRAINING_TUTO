@@ -48,7 +48,7 @@
       </div>
       <a href="{{ route('studentList') }}" class="btn btn-danger float-start">Cancel</a>
       <input type="submit" value="Add Student" class="btn btn-success float-end">
-    
+
     </form>
   </div>
 </div>
