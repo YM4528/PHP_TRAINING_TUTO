@@ -1,6 +1,7 @@
 @extends('layout.app')
 @section('content')
 <div class="card-body">
+  <a href="{{ route('studentList') }}" class="btn btn-sm btn-secondary mb-3"><i class="fas fa-arrow-left"></i>Back</a>
   <form action="{{ route('student.import.post') }}" method="post" enctype="multipart/form-data">
     @csrf
     <h2>Import</h2>
