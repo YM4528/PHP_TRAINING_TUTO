@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Models\Major;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     public function major()
     {
@@ -20,5 +22,6 @@ class Student extends Model
         'email',
         'major_id',
         'city',
+        'deleted_at'
     ];
 }

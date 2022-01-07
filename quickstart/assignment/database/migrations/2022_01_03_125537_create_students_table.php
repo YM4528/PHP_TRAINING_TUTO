@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('email');
             $table->integer('major_id')->index();
             $table->string('city');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
