@@ -2,8 +2,10 @@
 <html lang="en">
 
 <head>
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Laravel Quickstart - Basic</title>
-  <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+  <!--<link rel="stylesheet" href="{{ asset('css/reset.css') }}">-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <!-- CSS And JavaScript -->
@@ -13,7 +15,11 @@
   <nav class="navbar navbar-expand-lg navbar-light navbar-laravel shadow">
     <div class="container">
       <a class="navbar-brand" href="#">Student List</a>
+      <div class="float-end">
+        <a href="{{ route('API.studentList') }}">Go To API Page</a>
+      </div>
     </div>
+
   </nav>
   <div class="container mt-5">
     @yield('content')

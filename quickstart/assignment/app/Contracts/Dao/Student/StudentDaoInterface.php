@@ -27,7 +27,7 @@ interface StudentDaoInterface
 
     /**
      * To add new student
-     * @param Requst $request
+     * @param Request $request
      * @return
      */
     public function addStudent(Request $request);
@@ -52,10 +52,23 @@ interface StudentDaoInterface
      * @return
      */
     public function deleteStudentById($id);
+
     /**
      * To search students from list
      * @param Request $request
      * @return list of students
      */
     public function searchStudents(Request $request);
+
+    /**
+     * To get all students and majors data
+     * @return object array
+     */
+    public function getAllStudentsMajors();
+
+    /**
+     * To get 10 latest students
+     * @return $students array of student
+     */
+    public function latestStudents();
 }

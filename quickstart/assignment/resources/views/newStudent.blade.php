@@ -9,7 +9,7 @@
       @csrf
       <div class="mb-3">
         <label class="form-label">Name</label>
-        <input type="name" name="name" class="form-control" placeholder="Enter student name">
+        <input type="name" value="{{ old('name') }}" name="name" class="form-control" placeholder="Enter student name">
         @if ($errors->has('name'))
         <small class="text-danger">*{{ $errors->first('name') }}</small>
         @endif
@@ -17,14 +17,14 @@
 
       <div class="mb-3">
         <label class="form-label">Email address</label>
-        <input type="email" name="email" class="form-control" placeholder="Enter student email">
+        <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="Enter student email">
         @if ($errors->has('email'))
         <small class="text-danger">*{{ $errors->first('email') }}</small>
         @endif
       </div>
       <div class="mb-3">
         <label class="form-label">Choose major</label>
-        <select class="form-select" name="major">
+        <select class="form-select" value="{{ old('major') }}" name="major">
           <option value="">Choose major</option>
           @foreach ($majors as $item)
           <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -36,7 +36,7 @@
       </div>
       <div class="mb-3">
         <label class="form-label">City</label>
-        <input type="city" name="city" class="form-control" placeholder="Enter your home town">
+        <input type="city" value="{{ old('city') }}" name="city" class="form-control" placeholder="Enter your home town">
         @if ($errors->has('city'))
         <small class="text-danger">*{{ $errors->first('city') }}</small>
         @endif

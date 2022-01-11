@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Student\StudentApiController;
+use App\Http\Controllers\Student\StudentResourceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +38,24 @@ Route::post('/student/import/', [StudentController::class, 'import'])->name('stu
 Route::get('/student/search', [StudentController::class, 'showSearchForm'])->name('search.get');
 
 Route::post('/student/search', [StudentController::class, 'submitSearchForm'])->name('search.post');
+
+//Route::group(['prefix'=>'/api-view/'],function (){
+Route::get('/students', [StudentApiController::class, 'index'])->name('API.studentList');
+
+Route::get('students/api/add', [StudentApiController::class, 'showStudentFormApi'])->name('API.addStudent.get');
+Route::post('/students/api/add', [StudentApiController::class, 'createStudent'])->name('API.addStudent.post');
+
+Route::get('/students/api/edit/{id}', [StudentApiController::class, 'showEditFormApi'])->name('API.editStudent.get');
+Route::post('/student/api/edit/{id}', [StudentApiController::class, 'editStudent'])->name('API.editStudent.post');
+
+Route::get('/students/api/delete/{id}', [StudentApiController::class, 'deleteStudent'])->name('API.deleteStudent');
+//});
+
+Route::get('/shows', function () {
+  return view('API.studentList');
+});
+
+
+Route::get('/mail/send', [StudentController::class, 'showMailForm'])->name('mail.get');
+
+Route::post('/mail/send', [StudentController::class, 'submitMailForm'])->name('mail.post');

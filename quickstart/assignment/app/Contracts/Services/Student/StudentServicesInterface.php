@@ -68,4 +68,17 @@ interface StudentServicesInterface
      * @return list of students
      */
     public function searchStudents(Request $request);
+
+    /**
+     * To get all students and majors data
+     * @return object array
+     */
+    public function getAllStudentsMajors();
+
+    /**
+     * To get 10 latest students
+     * @return $students array of student
+     */
+    public function sendMailLatestStudents(Request $request);
+    
 }

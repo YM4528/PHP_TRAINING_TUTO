@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contracts\Services\Student\StudentServicesInterface;
@@ -10,23 +11,43 @@ class StudentController extends Controller
 {
     private $studentInterface;
 
+    /**
+     * Class Constructor
+     * @param StudentServicesInterface
+     * @return
+     */
     public function __construct(StudentServicesInterface $studentServiceInterface)
     {
         $this->studentInterface = $studentServiceInterface;
     }
 
+    /**
+     * To get all student list
+     * @param
+     * @return $students
+     */
     public function showStudentList()
     {
         $students = $this->studentInterface->getAllStudents();
         return view('studentList')->with(['students' => $students]);
     }
 
+    /**
+     * To redirect new student information form
+     * @param
+     * @return view
+     */
     public function showStudentForm()
     {
         $majors = $this->studentInterface->getMajors();
         return view('newStudent')->with(['majors' => $majors]);
     }
 
+    /**
+     * To save new student
+     * @param Request $request
+     * @return massage success or not
+     */
     public function submitStudentForm(Request $request)
     {
         $request->validate([
@@ -40,6 +61,11 @@ class StudentController extends Controller
         return redirect()->route('studentList')->with(['successMessage' => 'The new student is added successfully!']);
     }
 
+    /**
+     * To redirect student edit information form
+     * @param
+     * @return view
+     */
     public function showStudentEditForm($id)
     {
         $majors = $this->studentInterface->getMajors();
@@ -47,6 +73,11 @@ class StudentController extends Controller
         return view('editStudentForm')->with(['student' => $student, 'majors' => $majors]);
     }
 
+    /**
+     * To update student information
+     * @param student id, Request $request
+     * @return message success or not
+     */
     public function submitStudentEditForm($id, Request $request)
     {
         $request->validate([
@@ -60,42 +91,126 @@ class StudentController extends Controller
         return redirect()->route('studentList')->with(['successMessage' => 'The student data is updated successfully!']);
     }
 
+    /**
+     * To delete student by id
+     * @param student id
+     * @return message success or not
+     */
     public function deleteStudent($id)
     {
         $this->studentInterface->deleteStudentById($id);
         return redirect()->route('studentList')->with(['deleteMessage' => 'The student record is deleted successfully!']);
     }
 
+    /**
+     * To export student table to csv file
+     * @param
+     * @return
+     */
     public function export()
     {
         return $this->studentInterface->export();
     }
 
+    /**
+     * To redirect import form view
+     * @param
+     * @return
+     */
     public function showImportForm()
     {
         return view('import');
     }
 
+    /**
+     * To import csv to student table
+     * @param Request $request (csv file)
+     * @return message success or not
+     */
     public function import(Request $request)
     {
         $request->validate([
             'file' => 'required',
         ]);
         $this->studentInterface->import($request);
-        return redirect()->route('studentList');
+        return redirect()->route('studentList')->with(['successMessage' => 'The choose file is imported successfully!']);
     }
 
+    /**
+     * To redirect search form view
+     * @param
+     * @return
+     */
     public function showSearchForm()
     {
         return view('search');
     }
 
+    /**
+     * To get student lists by user input
+     * @param Request $request
+     * @return $students(list of students)
+     */
     public function submitSearchForm(Request $request)
     {
         if ($request->name != '' || $request->start != '' || $request->end != '') {
             $students = $this->studentInterface->searchStudents($request);
             return view('searchList')->with(['students' => $students]);
         }
-        return back()->with(['nullMessage' => '*Fill at least one input to search*']);
+        return back()->with(['nullMessage' => '*Please fill at least one input!']);
+    }
+
+    /**
+     * To redirect mail form view
+     * @param
+     * @return
+     */
+    public function showMailForm()
+    {
+        return view('sendMail');
+    }
+
+    /**
+     * To send mail with list of latest students
+     * @param Request $request
+     * @return message success or not
+     */
+    public function submitMailForm(Request $request)
+    {
+        $this->studentInterface->sendMailLatestStudents($request);
+        return redirect()->route('studentList')->with(['successMessage' => '*The email has been sent!']);
+    }
+
+    /**
+     * To redirect list of students api view
+     * @param
+     * @return
+     */
+    public function index()
+    {
+        return view('API.studentList');
+    }
+
+    /**
+     * To redirect new student form api view
+     * @param
+     * @return
+     */
+    public function showStudentFormApi()
+    {
+        $majors = $this->studentInterface->getMajors();
+        return view('API.addStudent')->with(['majors' => $majors]);
+    }
+
+    /**
+     * To redirect student edit api view
+     * @param
+     * @return
+     */
+    public function showEditFormApi($id)
+    {
+        $majors = $this->studentInterface->getMajors();
+        $student = $this->studentInterface->getStudentById($id);
+        return view('API.editStudent')->with(['student' => $student, 'majors' => $majors]);
     }
 }

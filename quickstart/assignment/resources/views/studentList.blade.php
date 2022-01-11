@@ -17,6 +17,7 @@
       @csrf
       <div class="d-flex mb-3 float-none justify-content-between">
         <input type="text" name="name" placeholder="Enter student name">
+        <input type="text" name="city" placeholder="Enter City">
         <div>
           <label> Choose StartDate </label>
           <input type="date" name="start" class="form-control">
@@ -46,9 +47,11 @@
 </div>
 @endif
 <div class="d-flex mb-3 float-none justify-content-between">
-  <a href="{{ route('addStudent.get') }}" class="btn btn-info"> <i class="fa fa-plus"></i> Add Student</a>
+  <a href="{{ route('addStudent.get') }}" class="btn btn-info"><i class="fa fa-plus"></i> Add Student</a>
+  <a href="{{ route('mail.get') }}" class="btn btn-info"><i class="far fa-envelope"></i> Send Mail</a>
   <a href="{{ route('student.export') }}" class="btn btn-success float-start .ms-1"><i class="fa fa-download"></i> Export</a>
   <a href="{{ route('student.import.get') }}" class="btn btn-success float-end"><i class="fas fa-file-import"></i> Import</a>
+
 </div>
 
 <table class="table table-info table-hover">

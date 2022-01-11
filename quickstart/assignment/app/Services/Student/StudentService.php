@@ -5,6 +5,7 @@ namespace App\Services\Student;
 use Illuminate\Http\Request;
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 use App\Contracts\Services\Student\StudentServicesInterface;
@@ -46,7 +47,11 @@ class StudentService implements StudentServicesInterface
      */
     public function addStudent(Request $request)
     {
-        $this->studentDao->addStudent($request);
+        $student = $this->studentDao->addStudent($request);
+        Mail::send('newStudentMail', ['student_name' => $request->name], function ($message) use ($request) {
+            $message->to($request->email, 'New student')->subject('Registration Information');
+        });
+        return $student;
     }
 
     /**
@@ -79,6 +84,7 @@ class StudentService implements StudentServicesInterface
     public function editStudentById(Request $request, $id)
     {
         $this->studentDao->editStudentById($request, $id);
+        return true;
     }
 
     /**
@@ -89,6 +95,7 @@ class StudentService implements StudentServicesInterface
     public function deleteStudentById($id)
     {
         $this->studentDao->deleteStudentById($id);
+        return true;
     }
 
     /**
@@ -98,7 +105,7 @@ class StudentService implements StudentServicesInterface
      */
     public function export()
     {
-        return Excel::download(new StudentsExport, 'students.csv');
+        return Excel::download(new StudentsExport($this->studentDao), 'students.csv');
     }
 
     /**
@@ -109,10 +116,51 @@ class StudentService implements StudentServicesInterface
     public function import(Request $request)
     {
         Excel::import(new StudentsImport, $request->file('file'));
+        return true;
     }
 
+    /**
+     * To search students from list
+     * @param Request $request
+     * @return list of students
+     */
     public function searchStudents(Request $request)
     {
         return $this->studentDao->searchStudents($request);
+    }
+
+    /**
+     * To get all students and majors data
+     * @return object array
+     */
+    public function getAllStudentsMajors()
+    {
+        return $this->studentDao->getAllStudentsMajors();
+    }
+
+    /**
+     * To get 10 latest students
+     * @return $students array of student
+     */
+    public function sendMailLatestStudents(Request $request)
+    {
+        $students = $this->studentDao->latestStudents();
+        Mail::send('latestStudents', ['students' => $students], function ($message) use ($request) {
+            $message->to($request->email, 'Receiver')->subject('Report Latest Students');
+        });
+        return true;
+    }
+
+    /**
+     * To generate list of students as pdf
+     * @param
+     * @return
+     */
+    public function generatePDF()
+    {
+        $students = $this->studentDao->getAllStudents();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('studentPdf', ['students' => $students]);
+        return $pdf->download('students.pdf');
     }
 }
