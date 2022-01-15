@@ -32,6 +32,17 @@ class StudentDao implements StudentDaoInterface
     }
 
     /**
+     * To get list of majors
+     *  @param
+     *  @return $majors
+     */
+    public function setMajors()
+    {
+        $majors = Major::get();
+        return $majors;
+    }
+
+    /**
      * To add new student
      * @param Request $request
      * @return
