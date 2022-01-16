@@ -36,7 +36,7 @@ class StudentDao implements StudentDaoInterface
      *  @param
      *  @return $majors
      */
-    public function setMajors()
+    public function setEmploees()
     {
         $majors = Major::get();
         return $majors;
